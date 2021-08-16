@@ -1,0 +1,68 @@
+/*
+sel
+00 = add
+01 = nand
+10 = compare: out will be 
+
+*/
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.numeric_std.all;
+
+entity alu is
+	(port aluA: in std_logic_vector (15 downto 0);
+			aluB: in std_logic_vector (15 downto 0);
+			res: out std_logic_vector (15 downto 0);
+			sel_oprn : in std_logic_vector (1 downto 0); -- select add or nand
+			sel_flag	: in std_logic_vector (1 downto 0); -- select simple, with carry, with zero
+			C,Z : inout std_logic;
+			wb_flag : in std_logic;
+	 );
+	 
+end;
+
+architecture behav of alu is
+signal temp_out std_logic_vector (15 downto 0);
+
+
+begin
+
+process (sel_oprn, sel_flag, aluA, aluB, res)
+begin
+
+		if (sel_oprn = "00") -- for addition
+				temp_out <= aluA + aluB;
+		elsif (sel_flag = "01") -- for nand
+				temp_out <= aluA nand aluB;
+		end if;
+	 
+		if (sel_oprn = "00" or sel_oprn = "01")
+		
+				case sel_flag is
+					  when "00" => wb_flag <= '1';
+					  when "01" => wb_flag <= '1' WHEN C = '1' else '0';
+					  when "10" => wb_flag <= '1' WHEN Z = '1' else '0';
+					  when others => wb_flag <= '0';
+				 end case;
+				 
+		end if
+	 
+		when
+
+
+
+
+
+end behav;	
+	
+	/*
+	case sel_flag is
+        when "00" => res <= aluA + aluB;
+        when "01" => res <= aluA + aluB WHEN C = '1' else
+									 "0xFF"; -- add what to be performed if C or Z != 0
+        when "10" => res <= 
+		  
+        when others => report "unreachable" severity failure;
+    end case;*/
+	 

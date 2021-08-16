@@ -1,0 +1,11 @@
+
+	
+entity wb_logic is (
+	port: C, Z : in std_logic;
+	    wb_flag: out std_logic
+		    sel : in std_logic; -- this is the MSB of the ALU select line; if 0=> activate
+	);
+	
+architecture behave of wb_logic is
+begin
+if (sel = '0')

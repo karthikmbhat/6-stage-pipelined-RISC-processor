@@ -1,0 +1,24 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.std_logic_arith.all;
+
+entity jump_logic is
+	port (
+			SE_PC_in : in std_logic_vector(15 downto 0);
+			pc_nxt : in std_logic_vector(15 downto 0);
+			RB_data : in std_logic_vector(15 downto 0);
+			sel : in std_logic_vector(2 downto 0);
+			pc_in : out std_logic_vector(15 downto 0);
+			);
+end;
+
+architecture behav of jump_logic is
+begin
+
+with sel select
+	pc_in <= SE_PC_in when "000",
+				pc_nxt when "001",
+				RB_data when "010",
+				X"0000" when others;
+
+end behav;

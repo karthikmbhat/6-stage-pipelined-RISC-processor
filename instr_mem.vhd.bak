@@ -1,0 +1,26 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.numeric_std.all;
+
+entity instr_mem is
+	port (
+			pc: in std_logic_vector(15 downto 0);
+			instruction: out  std_logic_vector(15 downto 0)
+		  );
+end;
+
+architecture behav of instr_mem is
+type i_mem is array (13 downto 0) of std_logic_vector(15 downto 0);
+signal mem: i_mem;
+
+
+begin
+L1:for i in 13 downto 0 generate;
+	mem(i) <= "x0000";
+end generate;
+instruction <= mem(to_integer(unsigned(pc)));
+
+
+
+
+end behav;

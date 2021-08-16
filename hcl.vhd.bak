@@ -1,0 +1,13 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.numeric_std.all;
+
+entity hcl is
+	port (
+		  );
+end;
+
+architecture behav of hcl is
+
+
+begin

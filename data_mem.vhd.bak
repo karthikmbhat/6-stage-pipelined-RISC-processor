@@ -1,0 +1,23 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.numeric_std.all;
+
+entity data_mem is
+	port(addr : in std_logic_vector(15 downto 0);
+		  wr_en : in std_logic;
+		  rd_wr : inout std_logic_vector(15 downto 0)
+		 );
+end;
+
+architecture behav of data_mem is
+type d_mem is array (13 downto 0) of std_logic_vector(15 downto 0);
+signal mem: d_mem;
+
+begin
+if wr_en = '1' then
+rd_wr <= mem(to_integer(unsigned(addr)));
+elsif wr_en = '0' then
+mem(to_integer(unsigned(addr))) <= rd_wr;
+end if;
+
+end behav;
